@@ -27,8 +27,7 @@ void ResetWalkMode(){
   CalorieWalkBurn = 0;
   CalorieWalk = 0;
   Blynk.virtualWrite(V4, StepWalk);
-  Blynk.virtualWrite(V6, TotalCalorie);
-  sendToBlynk();      
+  Blynk.virtualWrite(V6, TotalCalorie);    
 }
 
 void ResetArmMode(){
@@ -37,21 +36,20 @@ void ResetArmMode(){
   CalorieArm = 0;
   Blynk.virtualWrite(V5, SwingArm);
   Blynk.virtualWrite(V6, TotalCalorie);
-  sendToBlynk();
 }
 
 void setup(){
 //โค้ดที่จำเป็นต้องเซตอัปก่อนที่จะไปรันในโค้ดหลัก
-    M5.begin(); //Super mega very important for everyting project with use M5Family
-    M5.Imu.Init(); //Super mega very important for this project
+    M5.begin(); //Super mega very important for everyting project with use M5Family สั้ง M5StickCPLus ให้พร้อมทำงาน
+    M5.Imu.Init(); //Super mega very important for this project สั้ง MPU6886 ให้พร้อมทำงาน
 }
 
 void loop(){
 //โค้ดทำงานหลักที่จะให้แสดงผลบนหน้าจอและส่งค่าไปยัง Blynk
     M5.update(); //เพื่อให้อ่านค่าจากการกดปุ่ม
    /*-----STEPCOUNTING&STEPARM-----*/
-    M5.Imu.getGyroData(&gyroX, &gyroY, &gyroZ);
-    M5.Imu.getAccelData(&accX, &accY, &accZ);
+    M5.Imu.getGyroData(&gyroX, &gyroY, &gyroZ); //รับค่าGyro จาก MPU6886
+    M5.Imu.getAccelData(&accX, &accY, &accZ);//รับค่าAcc จาก MPU6886
     Blynk.virtualWrite(V8, UserWeight);//รับค่าน้ำหนักผู้ใช้ที่ได้จาก Blynk โดยที่ Blynk รับค่าจาก Slider บน Smartphone หรือ web
     Blynk.virtualWrite(V7, Mode);//รับค่าโหมดจาก  Blynk โดยที่ Blynk รับค่าจาก Button switch mode บน Smartphone หรือ web
     float accMagnitude = sqrt(accX * accX + accY * accY + accZ * accZ); // คำนวณค่าแรงโน้มถ่วงของความเร่ง (magnitude) สูตรช่วยชีวิต
@@ -65,7 +63,6 @@ void loop(){
             TotalCalorie = CalorieWalk + CalorieArm;
             Blynk.virtualWrite(V4, StepWalk); //ส่งค่าจาก device(M5StickCPlus) ไปยัง Blynk Server เพื่อรอให้ไปแสดงผลบน Smartphone หรือ web เมื่อเรียกข้อข้อมูล
             Blynk.virtualWrite(V6, TotalCalorie);
-            sendToBlynk();
         }
     } else if (Mode == 0) {
         if (M5.BtnA.wasReleased()) {
@@ -77,8 +74,6 @@ void loop(){
             TotalCalorie = CalorieWalk + CalorieArm;
             Blynk.virtualWrite(V5, SwingArm);
             Blynk.virtualWrite(V6, TotalCalorie);
-            sendToBlynk();
         }
     }
-    sendToBlynk();
 }
