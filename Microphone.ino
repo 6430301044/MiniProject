@@ -1,5 +1,5 @@
-//ตัวแปรที่จำเป็นสำหรับ Counting
-//ตัวแปรแรกคือ include or import everything is important for this counting project
+//ตัวแปรที่จำเป็นสำหรับ Microphone
+//ตัวแปรแรกคือ include or import everything is important for this Microphone project
 #include "M5StickCPlus.h" //import libary ของ M5StickCPlus
 #include <driver/i2s.h> //import libary ของ I2S (Inter-IC Sound) Microphone
 
