@@ -1,7 +1,6 @@
 #include "M5StickCPlus.h" //import libary ของ M5StickCPlus
 #include "AXP192.h" //import libary ของ AXP192 ตัว manage power
 #include "7seg70.h" //import ข้อมูลต่างๆจากไฟล์ 7seg70.h
-#include "ani.h"  
 #include <driver/i2s.h> //import libary ของ I2S (Inter-IC Sound) Microphone
 
 #define grey 0x65DB // ประกาศว่า grey คือสี 0x65DB สีเทานะแหละ
@@ -106,16 +105,6 @@ BLYNK_CONNECTED() {
     Blynk.syncAll();
 }
 
-unsigned long sendToBlynkPremillis = 0;
-
-void sendToBlynk() {
-    // current time - previous time >= 300;
-    // previous = current tim
-    if (millis() - sendToBlynkPremillis >= 300) {
-        sendToBlynkPremillis = millis();
-    }
-}
-
 void i2sInit() {
     i2s_config_t i2s_config = {
             .mode = (i2s_mode_t)(I2S_MODE_MASTER | I2S_MODE_RX | I2S_MODE_PDM),
@@ -154,8 +143,7 @@ void ResetWalkMode(){
   CalorieWalkBurn = 0;
   CalorieWalk = 0;
   Blynk.virtualWrite(V4, StepWalk);
-  Blynk.virtualWrite(V6, TotalCalorie);
-  sendToBlynk();      
+  Blynk.virtualWrite(V6, TotalCalorie);  
 }
 
 void ResetArmMode(){
@@ -164,7 +152,6 @@ void ResetArmMode(){
   CalorieArm = 0;
   Blynk.virtualWrite(V5, SwingArm);
   Blynk.virtualWrite(V6, TotalCalorie);
-  sendToBlynk();
 }
 
 void setup() {
@@ -241,11 +228,6 @@ void loop() {
         inv = !inv;
     }
 
-    M5.Lcd.pushImage(112, 12, 40, 40, ani[frame]);
-    frame++;
-    if (frame == 132)
-        frame = 0;
-
     delay(12);
     /*--------------BLYNK--------------*/
     Blynk.run();
@@ -276,7 +258,6 @@ void loop() {
             TotalCalorie = CalorieWalk + CalorieArm;
             Blynk.virtualWrite(V4, StepWalk);
             Blynk.virtualWrite(V6, TotalCalorie);
-            sendToBlynk();
         }
     } else if (Mode == 0) {
         if (M5.BtnA.wasReleased()) {
@@ -288,10 +269,8 @@ void loop() {
             TotalCalorie = CalorieWalk + CalorieArm;
             Blynk.virtualWrite(V5, SwingArm);
             Blynk.virtualWrite(V6, TotalCalorie);
-            sendToBlynk();
         }
     }
-    sendToBlynk();
     /*-----------MICROPHONE-----------*/
     size_t bytesread;
 
