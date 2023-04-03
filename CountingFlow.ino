@@ -42,7 +42,8 @@ void ResetArmMode(){
 
 void setup(){
 //โค้ดที่จำเป็นต้องเซตอัปก่อนที่จะไปรันในโค้ดหลัก
-    M5.Imu.Init(); //Super mega very important
+    M5.begin(); //Super mega very important for everyting project with use M5Family
+    M5.Imu.Init(); //Super mega very important for this project
 }
 
 void loop(){
