@@ -27,7 +27,7 @@ int frame = 0;
 
 void setup(){
 //โค้ดที่จำเป็นต้องเซตอัปก่อนที่จะไปรันในโค้ดหลัก
-    M5.begin();//สั่งให้ M5 เริ่มทำงาน
+    M5.begin();//สั่งให้ M5 เริ่มทำงาน [Super mega very important for everything project with use M5Family]
     M5.Lcd.setRotation(3); // สั้งให้หมุนตำแหน่ง x,y ไป 270 องศา
     M5.Lcd.fillScreen(BLACK); //สั่งให้พื้นหลังสีดำ
     M5.Lcd.setSwapBytes(true); //สั่งให้สลับ byte ในโปรเจกต์นี้ใช้สำหรับกำหนดสี เพื่อให้สีมีความถูกต้องเพิ่มมากขึ้นเพื่อไปแสดงบนจอ LCD
