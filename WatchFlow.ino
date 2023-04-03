@@ -9,8 +9,8 @@
 #define grey 0x65DB // ประกาศว่า grey คือสี 0x65DB สีเทานะแหละ
 
 // Variable for this project
-RTC_TimeTypeDef RTC_TimeStruct;//ประกาศตัวแปร เซตเวลา ชื่อ RTC_TimeStruct
-RTC_DateTypeDef RTC_DateStruct;//ประกาศตัวแปร เซตวันเดือนปี ชื่อ RTC_DateStruct
+RTC_TimeTypeDef RTC_TimeStruct;//ประกาศตัวแปร เซตเวลา ชื่อ RTC_TimeStruct ชนิดตัวแปรเป็น RTC_TimeTypeDef
+RTC_DateTypeDef RTC_DateStruct;//ประกาศตัวแปร เซตวันเดือนปี ชื่อ RTC_DateStruct ชนิดตัวแปรเป็น RTC_DateTypeDef
 int H = 0;
 int M = 0;
 
