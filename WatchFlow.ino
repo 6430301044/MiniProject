@@ -1,9 +1,8 @@
 //ตัวแปรที่จำเป็นสำหรับ Watch
 //ตัวแปรแรกคือ include or import everything is important for this watch project
-#include "M5StickCPlus.h" 
-#include "AXP192.h" 
-#include "7seg70.h" 
-#include "ani.h"
+#include "M5StickCPlus.h" //import libary ของ M5StickCPlus
+#include "AXP192.h" //import libary ของ AXP192 ตัว manage power
+#include "7seg70.h" //import ข้อมูลต่างๆจากไฟล์ 7seg70.h
 
 //ประกาศให้ตัวแปรเป็นค่าคงที่
 #define grey 0x65DB // ประกาศว่า grey คือสี 0x65DB สีเทานะแหละ
@@ -44,7 +43,7 @@ void setup(){
     TimeStruct.Seconds = 0;
     //M5.Rtc.SetTime(&TimeStruct);  //สำหรับตั้งค่าเวลาลงบนตัว RTC
     RTC_DateTypeDef DateStruct;
-    DateStruct.WeekDay = 7;
+    DateStruct.WeekDay = 6;
     DateStruct.Month = 4;
     DateStruct.Date = 2;
     DateStruct.Year = 2023;
@@ -94,12 +93,7 @@ void loop(){
         M5.Lcd.invertDisplay(inv);
         inv = !inv;
     }
-
-    M5.Lcd.pushImage(112, 12, 40, 40, ani[frame]); //แสดงภาพที่ได้จากไฟล์ ani.h
-    frame++;
-    if (frame == 132)
-        frame = 0;
-
+  
     delay(12);//สั่งให้สลีปเป็นเวลา 12 มิลลิวินาที ก่อนทำงานอีกรอบ
 
 }
