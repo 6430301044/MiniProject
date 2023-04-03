@@ -59,7 +59,7 @@ void loop(){
         } else if (accMagnitude > threshold) {
             StepWalk++;
             CalorieWalkBurn = StepWalk * (0.57 * UserWeight) / 1000;
-            CalorieWalk = CalorieWalk + CalorieWalkBurn;
+            CalorieWalk = CalorieWalk + CalorieWalkBurn; //เพื่อป้องกัน กรณีที่ UserWeight เป็น 0
             TotalCalorie = CalorieWalk + CalorieArm;
             Blynk.virtualWrite(V4, StepWalk); //ส่งค่าจาก device(M5StickCPlus) ไปยัง Blynk Server เพื่อรอให้ไปแสดงผลบน Smartphone หรือ web เมื่อเรียกข้อข้อมูล
             Blynk.virtualWrite(V6, TotalCalorie);
