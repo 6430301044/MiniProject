@@ -27,7 +27,7 @@ char pass[] = "YourPassword";
 // Variable for this project
 int brightness = 8;
 
-*-------------BLYNKCOMMARD-------------*/
+/*-------------BLYNKCOMMARD-------------*/
 BLYNK_WRITE(V0) {  // รับค่า Brightness จาก Widget Slider บนแอป Blynk IoT ผ่าน V0
         brightness = param.asInt();  // อ่านค่า Brightness ที่ส่งมาจากแอป Blynk IoT
         M5.Axp.ScreenBreath(brightness);  // กำหนดค่า Brightness ให้กับจอ M5StickC Plus
